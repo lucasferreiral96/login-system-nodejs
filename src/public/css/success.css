@@ -1,0 +1,37 @@
+body{
+    background-color: #283618;
+    font-family: sans-serif;
+    margin: auto;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.successmsg{
+    width: 600px;
+    border: 1px solid gray;
+    margin: 30px 0;
+    padding: 30px 0 30px 70px;
+}
+
+.successmsg h1{
+    text-align: left;
+    color: #606c38;
+}
+
+.successmsg a{
+    text-decoration: none;
+    padding: 3px 10px;
+    background-color: #606c38;
+    color: #283618;
+    border-radius: 3px;
+    font-size: 20px;
+    transition-duration: .3s;
+}
+
+.successmsg a:hover{
+    background-color: #a7bb64;
+}

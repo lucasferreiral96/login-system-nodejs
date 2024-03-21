@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <%- include('menu.ejs') -%>
+    <div class="container">
+        <div class="content">
+            <h1>Login</h1>
+            <form action="">
+                <div class="email">
+                    <label for="email">E-mail </label>
+                    <input type="text" id="email" name="email" placeholder="Insira seu e-mail">
+                </div>
+                <div class="senha">
+                    <label for="password">Senha </label>
+                    <input type="password" id="password" placeholder="Insira sua senha">
+                </div>
+                <div class="login-btn">
+                    <input type="submit" value="Entrar">
+                </div>
+                <div class="signup-btn">
+                    <div class="notmember">
+                        <span>Ainda não é membro? </span>
+                    </div>
+                    <a href="/signup">Criar uma conta</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

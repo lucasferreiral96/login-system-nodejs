@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/signup.css">
+
+    <title>Sign Up</title>
+</head>
+<body>
+    <%- include('menu.ejs') -%>
+
+    <div class="container">
+        <div class="signup-form">
+
+                <form action="" method="post" id="form_data">
+                    <h1>Tela de cadastro</h1>
+                <div class="nome">
+                    <label for="nome">Nome</label>
+                    <input name="nome" type="text" placeholder="Insira seu nome">
+                </div>
+                
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input name="email" type="text" placeholder="Insira seu email">
+                </div>
+                
+                <div class="senha">
+                    <label for="senha">Senha</label>
+                    <input name="senha" type="password" placeholder="Insira sua senha">
+                </div>
+        
+                <input class="btn-signup" id="sendbtn" type="submit" value="Cadastrar">
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/signup.js"></script>
+</body>
+</html>

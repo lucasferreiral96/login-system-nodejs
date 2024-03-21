@@ -1,0 +1,93 @@
+body{
+    background-color: #283618;
+    font-family: sans-serif;
+
+}
+
+header{
+    background-color: #606c38;
+    padding: 10px 30px;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-links a{
+text-decoration: none;
+color: #fff;
+padding: 5px 10px;
+background-color: #283618;
+border-radius: 3px;
+transition-duration: .3s;
+}
+
+.menu-links a:hover{
+    background-color: #132a13;
+    color: #fff;
+}
+
+.container{
+    background-color: #606c38;
+    min-width: 650px;
+    max-width: 650px;
+    margin: 100px auto;
+    padding: 50px 20px;
+    border-radius: 3px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    padding: 15px 30px;
+}
+
+.signup-form{
+    width: 100%;
+}
+
+.signup-form form{
+    color: #fff;
+}
+
+.signup-form form h1{
+    padding: 20px 0;
+}
+
+.nome,
+.email,
+.senha{
+    margin: 0 0 50px 0;
+}
+
+.btn-signup{
+    margin: 30px 0 20px 0 ;
+    border: none;
+    font-size: 16px;
+    line-height: 26px;
+    cursor: pointer;
+    transition-duration: .3s;
+}
+
+.btn-signup:hover{
+    background-color: #283618;
+    color: #fff;
+}
+
+.nome label,
+.email label,
+.senha label{
+    display: block;
+}
+
+.nome input,
+.email input,
+.senha input{
+    width: 100%;
+    line-height: 25px;
+    font-size: 16px;
+    padding: 0 0 0 5px;
+}

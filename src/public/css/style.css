@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #283618;
+}
+
+.container{
+    background-color: #606c38;
+    min-width: 450px;
+    max-width: 450px;
+    margin: 100px auto;
+    padding: 10px 5px 30px 5px;
+    border-radius: 3px;
+}
+
+.content{
+    padding: 0 5px;
+}
+
+.title h2{
+    text-align: center;
+    margin: 20px 0;
+
+}
+
+.content{
+    color: #efefef;
+    display: flex;
+}
+
+.content span:nth-child(1){
+    margin: 0 5px 0 0;
+    font-weight: 600;
+}
+
+.content span:nth-child(2){
+    font-size: 12px;
+    line-height: 18px;
+}
