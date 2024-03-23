@@ -1,27 +1,27 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const schema = require("./userSchema");
-
 const dotenv = require("dotenv");
 dotenv.config();
 
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const schema = require("./userSchema");
 const SECRET = process.env.SECRET;
 
-const login = async (req, res) => {
-
-    try {
-       
-    } catch (error) {
-
-    }
-
+// Criptografar senha
+async function hashPass(password){
+    const res = await bcrypt.hash(password, 10);
+    return res;
 }
 
+// Comparar senha do formulario com a dados do banco de dados caso exista.
+async function compare(userPass, hashPass){
+    const res = await bcrypt.compare(userPass, hashPass);
+    return res;
+}
+
+// Função para criar contas
 const signup = async (req, res) => {
     try {
         const body = req.body;
-        console.log(body);
 
         if(body.nome == "" || body.email == "" || body.senha == ""){
             return res.status(401).send("<span class=\"emptyfields\" style=\"color: red; font-family: sans-serif\">Não foi possível proseguir, todos os campos devem estar preenchidos</span>"+"<br>"+"<a href=\"/signup\">Voltar</a>");
@@ -33,10 +33,17 @@ const signup = async (req, res) => {
                 res.status(401).json("E-mail ja existe");
         
                }else{
-                   const token = jwt.sign({email: req.body.email}, process.env.SECRET)
+                   const token = jwt.sign({email: req.body.email}, SECRET)
+
+                res.cookie("jwt", token, {
+                    maxAge: 600000,
+                    httpOnly: true,
+                    
+                })
+
                    const data = {
                        email: req.body.email,
-                       senha: req.body.senha,
+                       senha: await hashPass(req.body.senha),
                        token
                     }
         
@@ -53,28 +60,37 @@ const signup = async (req, res) => {
     }
 
 }
-    
 
-    
+// Função para fazer login
+const login = async function(req, res){
+    try {
+          const verify = await schema.findOne({email: req.body.email}); 
+          if(!verify){
+            res.send("Usuário não encontrado");
+          }         
+          const pwdcheck = await compare(req.body.senha, verify.senha);
 
-const savedata = (req, res) => {
-    const body = req.body;
-    const newschema = new schema(body)
+            if(verify && pwdcheck){
+            res.cookie("jwt", verify.token, {
+                maxAge: 600000,
+                httpOnly: true,
 
-    newschema.save({}).then((sucesso) => {
-        if(sucesso){
-            res.status(200).json("Cadastrado com sucesso")
-        }
-    }).catch((erro) => {
-        if(erro){
-            res.status(500).json("Erro ao cadastrar: "+erro.message);
-        }
-    })
+            })
+
+                res.render("dashboard", {email: req.body.email});
+            }else{
+                res.send("Dados Inválidos, tente novamente.");
+            }
+
+    } catch (error) {
+        console.log("Algo deu errado, método login(): "+error.message);
+    }
 
 }
 
 module.exports = {
     login,
-    savedata,
-    signup
+    signup,
+    hashPass,
+    compare
 }

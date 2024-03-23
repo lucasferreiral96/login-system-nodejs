@@ -6,15 +6,16 @@ const app = express();
 const authController = require("./src/models/authController");
 const mongoose = require("mongoose");
 const cookieparser = require("cookie-parser");
-const RouterController = require("./src/models/RouteController");
-const connflash = require("connect-flash");
+// const RouterController = require("./src/models/RouteController");
 const express_session = require("express-session");
 const jwt = require("jsonwebtoken");
-const schema = require("./src/models/userSchema");
 
-app.use(express.json());
+
+
 app.use(cookieparser());
-app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 
 app.use(express_session({
 secret: "loginsecret",
@@ -30,18 +31,20 @@ app.use('/js', express.static(__dirname+'/src/public/js/'))
 app.set('views', __dirname+'/src/views');
 
 
-app.use("/primeiro", RouterController);
 
 //Template Engine
 app.set('view engine', 'ejs');
 
-
 app.post("/login", authController.login);
-app.post("/salvar", authController.savedata);
 app.post("/signup", authController.signup);
 
 app.get("/", (req, res) => {
-    res.render("index");
+    if(req.cookies.jwt){
+        const verify = jwt.verify(req.cookies.jwt, "3556013235560132355601323556013235560132355601323556013235560132");
+        res.render("dashboard", {email: verify.email});
+    }else{
+        res.render("index");
+    }
 })
 
 app.get("/login", (req, res) => {
@@ -56,13 +59,16 @@ app.get("/menu", (req, res) => {
     res.render('menu')
 })
 
-app.get("/logado", (req, res) => {
-    res.render("logged");
+app.get("/dashboard", (req, res) => {
+    res.render("dashboard");
 })
 
 app.post("/success", (req, res) => {
     res.render("success");
 })
+
+
+
 
 
 mongoose.connect("mongodb://localhost:27017/JwtExercise").then((sucesso) => {
